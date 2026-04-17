@@ -1,0 +1,2 @@
+# Secure DevSecOps Pipeline
+A hands-on DevSecOps project demonstrating a simple Flask application that will later be secured through CI/CD, code scanning, secret detection, dependency scanning, containerization, and cloud deployment.
