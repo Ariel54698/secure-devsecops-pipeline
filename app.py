@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -8,13 +9,13 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    hardcoded_password = "123456"  # intentional vulnerability
+    stored_password = os.getenv("APP_PASSWORD", "defaultpassword")
 
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
 
-        if password == hardcoded_password:
+        if password == stored_password:
             return f"Welcome, {username}"
         else:
             return "Invalid credentials", 401
@@ -29,4 +30,4 @@ def status():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
