@@ -1,15 +1,13 @@
-FROM python:3.11-slim-bookworm
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY . .
+COPY requirements.txt .
 
-RUN apt-get update && apt-get upgrade -y && \
+# חשוב מאוד 👇
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel && \
     pip install --no-cache-dir -r requirements.txt
 
-ENV FLASK_HOST=0.0.0.0
-ENV FLASK_PORT=5000
-
-EXPOSE 5000
+COPY . .
 
 CMD ["python", "app.py"]
